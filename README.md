@@ -2,6 +2,12 @@
 
 Analysis and prediction of drought conditions across California's 58 counties using NASA meteorological data (2000–2020) and machine learning.
 
+California has experienced increasingly severe and prolonged drought over the past two decades, with significant consequences for agriculture, water supply, and ecosystems. Accurately predicting drought conditions at the county level is challenging because drought is the result of complex interactions between precipitation deficits, temperature extremes, and soil-atmospheric dynamics. This project addresses that challenge by building a classification system that predicts drought intensity — measured by the Palmer Drought Severity Index (PDSI, scored 0–5) — from routine meteorological observations, enabling earlier and more granular drought detection across the state.
+
+The dataset spans 21 years (2000–2020) of daily NASA POWER meteorological readings for all 58 California counties, yielding ~445,000 daily records with 18 features covering precipitation, surface pressure, humidity, temperatures, and wind speeds at 10 m and 50 m heights. Exploratory analysis revealed that PDSI labels are recorded weekly (not daily), making only ~63,500 records labeled. Precipitation (PRECTOT) showed the strongest negative correlation with drought score, while temperature features (T2M, T2M_MAX, TS) were positively correlated. Geographic analysis highlighted that southern and central valley counties consistently experienced the highest frequency of extreme drought (PDSI = 5) over the study period.
+
+To bridge the gap between daily meteorological readings and weekly drought labels, each labeled observation was paired with the 90-day rolling average of all 18 features up to that date — capturing the cumulative nature of drought rather than any single day's conditions. Features were normalized using Min-Max scaling before model training. Five algorithms were evaluated on a binary drought/no-drought classification task: ANN, SVM (RBF kernel), Logistic Regression, XGBoost, and KNN, along with voting and stacking ensembles. KNN achieved the best standalone accuracy (~81%), and ensemble methods were explored to further improve robustness.
+
 ---
 
 ## Notebooks
